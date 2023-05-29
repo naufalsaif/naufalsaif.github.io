@@ -17,5 +17,6 @@
     "naufalsaif" : "Naufal Saif",
     "judul-naufalsaif" : "Naufal Saif - Web Developer",
     "meta-locale": "en_US",
-    "meta-description": "Naufal Saif is a Web Developer who masters Codeigniter, Laravel, Next.js and provides website creation services"
+    "meta-description": "Naufal Saif is a Web Developer who masters Codeigniter, Laravel, Next.js and provides website creation services",
+    "meta-url": "https://naufalsaif.vercel.app/"
 }

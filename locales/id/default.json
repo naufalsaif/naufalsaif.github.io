@@ -17,5 +17,6 @@
     "naufalsaif" : "Naufal Saif",
     "judul-naufalsaif" : "Naufal Saif - Web Developer",
     "meta-locale": "id_ID",
-    "meta-description": "Naufal Saif adalah Web Developer menguasai Codeigniter, Laravel, Next.js dan menyediakan jasa pembuatan website"
+    "meta-description": "Naufal Saif adalah Web Developer menguasai Codeigniter, Laravel, Next.js dan menyediakan jasa pembuatan website",
+    "meta-url": "https://naufalsaif.vercel.app/"
 }

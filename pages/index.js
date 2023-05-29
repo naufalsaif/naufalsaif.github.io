@@ -157,7 +157,7 @@ export default function Home() {
           content="https://akcdn.detik.net.id/logo_tematik/logodetiknews.png"
         /> */}
         <meta property="og:description" content={i18n.t("meta-description")} />
-        {/* <meta property="og:url" content="https://news.detik.com/" /> */}
+        <meta property="og:url" content={i18n.t("meta-url")} />
         <meta property="og:locale" content={i18n.t("meta-locale")} />
         <meta
           name="copyright"
@@ -188,8 +188,8 @@ export default function Home() {
           itemprop="thumbnailUrl"
         /> */}
 
-        {/* <meta content="https://news.detik.com/" itemprop="url" />
-        <link rel="canonical" href="https://news.detik.com" /> */}
+        <meta content={i18n.t("meta-url")} itemprop="url" />
+        <link rel="canonical" href={i18n.t("meta-url")} />
         {/* <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@detikcom" />
         <meta name="twitter:site:id" content="@detikcom" />
