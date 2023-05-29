@@ -1,0 +1,21 @@
+{
+    "pengembang-web" : "Web Developer",
+    "beranda": "Home",
+    "tentang-saya" : "About Me",
+    "proyek" : "Projects",
+    "linimasa" : "Timeline",
+    "kontak" : "Contact",
+    "mempekerjakan-saya": "Hire Me",
+    "saya-naufal" : "I'm Naufal",
+    "unduh-cv" : "Download CV",
+    "proyek-saya" : "My Projects",
+    "hubungi-saya" : "Contact Me",
+    "nama" : "Name",
+    "pesan" : "Message",
+    "kirim-pesan" : "Send Message",
+    "hak-cipta-naufalsaif" : "Naufalsaif. All rights reserved",
+    "naufalsaif" : "Naufal Saif",
+    "judul-naufalsaif" : "Naufal Saif - Web Developer",
+    "meta-locale": "en_US",
+    "meta-description": "Naufal Saif is a Web Developer who masters Codeigniter, Laravel, Next.js and provides website creation services"
+}
