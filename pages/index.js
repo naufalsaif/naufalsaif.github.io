@@ -198,7 +198,7 @@ export default function Home() {
         <meta name="twitter:description" content={i18n.t("meta-description")} />
         <meta name="twitter:image" content={i18n.t("meta-og")} /> */}
 
-        <Script
+        {/* <Script
           strategy="lazyOnload"
           src="https://www.googletagmanager.com/gtag/js?id=G-6LH45X6JZ1"
         />
@@ -211,7 +211,7 @@ export default function Home() {
       
         gtag('config', 'G-6LH45X6JZ1');
     `}
-        </Script>
+        </Script> */}
         <link rel="icon" href="/naufal.ico" />
       </Head>
       <div className="bg-white text-slate-500 dark:bg-dark dark:text-light">
