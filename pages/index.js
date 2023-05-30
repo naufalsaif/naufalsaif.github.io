@@ -49,12 +49,12 @@ export default function Home() {
   const { locale } = router;
 
   useEffect(() => {
-    document.body.classList.add("overflow-hidden");
+    // document.body.classList.add("overflow-hidden");
 
-    setTimeout(() => {
-      document.body.classList.remove("overflow-hidden");
-      document.getElementById("loading").classList.add("hidden");
-    }, 1000);
+    // setTimeout(() => {
+    //   document.body.classList.remove("overflow-hidden");
+    //   document.getElementById("loading").classList.add("hidden");
+    // }, 1000);
 
     if (localStorage.theme === "dark") {
       setDarkMode(true);
@@ -212,14 +212,10 @@ export default function Home() {
         gtag('config', 'G-6LH45X6JZ1');
     `}
         </Script>
-        {/* <meta
-          name="google-site-verification"
-          content="ocebThsbBPwqKbDyYpqk80QDwsaSZuqBLBgmP4KLVK8"
-        /> */}
         <link rel="icon" href="/naufal.ico" />
       </Head>
       <div className="bg-white text-slate-500 dark:bg-dark dark:text-light">
-        <div
+        {/* <div
           id="loading"
           className="fixed z-[999] min-h-screen min-w-[100vw] bg-white dark:bg-dark flex justify-center items-center"
         >
@@ -227,7 +223,7 @@ export default function Home() {
             <BsHourglass className="mb-2 text-3xl animate-spin" />
             <h1 className="animate-pulse">Loading...</h1>
           </div>
-        </div>
+        </div> */}
         <header
           ref={menuRef}
           className={`absolute top-0 left-0 z-10 flex w-full items-center bg-transparent lg:px-40 ${
