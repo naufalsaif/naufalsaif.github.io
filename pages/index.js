@@ -49,12 +49,12 @@ export default function Home() {
   const { locale } = router;
 
   useEffect(() => {
-    // document.body.classList.add("overflow-hidden");
+    document.body.classList.add("overflow-hidden");
 
-    // setTimeout(() => {
-    //   document.body.classList.remove("overflow-hidden");
-    //   document.getElementById("loading").classList.add("hidden");
-    // }, 1000);
+    setTimeout(() => {
+      document.body.classList.remove("overflow-hidden");
+      document.getElementById("loading").classList.add("hidden");
+    }, 1000);
 
     if (localStorage.theme === "dark") {
       setDarkMode(true);
@@ -142,7 +142,7 @@ export default function Home() {
     <div className={`${darkMode ? "dark" : ""}`}>
       <Head>
         <title>{i18n.t("judul-naufalsaif")}</title>
-        <meta
+        {/* <meta
           name="description"
           content={i18n.t("meta-description")}
           itemprop="description"
@@ -196,7 +196,7 @@ export default function Home() {
           content={i18n.t("meta-twitter-username")}
         />
         <meta name="twitter:description" content={i18n.t("meta-description")} />
-        <meta name="twitter:image" content={i18n.t("meta-og")} />
+        <meta name="twitter:image" content={i18n.t("meta-og")} /> */}
 
         <Script
           strategy="lazyOnload"
@@ -215,7 +215,7 @@ export default function Home() {
         <link rel="icon" href="/naufal.ico" />
       </Head>
       <div className="bg-white text-slate-500 dark:bg-dark dark:text-light">
-        {/* <div
+        <div
           id="loading"
           className="fixed z-[999] min-h-screen min-w-[100vw] bg-white dark:bg-dark flex justify-center items-center"
         >
@@ -223,7 +223,7 @@ export default function Home() {
             <BsHourglass className="mb-2 text-3xl animate-spin" />
             <h1 className="animate-pulse">Loading...</h1>
           </div>
-        </div> */}
+        </div>
         <header
           ref={menuRef}
           className={`absolute top-0 left-0 z-10 flex w-full items-center bg-transparent lg:px-40 ${
