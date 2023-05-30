@@ -36,6 +36,7 @@ import { FaCss3Alt } from "react-icons/fa";
 import { RiArrowUpSLine } from "react-icons/ri";
 import { BiCopyright } from "react-icons/bi";
 import { useRouter } from "next/router";
+import Script from "next/script";
 
 export default function Home() {
   const [navBar, setNavbar] = useState(false);
@@ -152,10 +153,7 @@ export default function Home() {
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={i18n.t("naufalsaif")} />
         <meta property="og:title" content={i18n.t("judul-naufalsaif")} />
-        {/* <meta
-          property="og:image"
-          content="https://akcdn.detik.net.id/logo_tematik/logodetiknews.png"
-        /> */}
+        <meta property="og:image" content={i18n.t("meta-og")} />
         <meta property="og:description" content={i18n.t("meta-description")} />
         <meta property="og:url" content={i18n.t("meta-url")} />
         <meta property="og:locale" content={i18n.t("meta-locale")} />
@@ -165,12 +163,9 @@ export default function Home() {
           itemprop="dateline"
         />
 
-        {/* <meta
-          property="og:image:url"
-          content="https://helmisatria.com/images/og.png"
-        />
+        <meta property="og:image:url" content={i18n.t("meta-og")} />
         <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" /> */}
+        <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content={i18n.t("naufalsaif")} />
 
         <meta name="robots" content="index, follow" />
@@ -182,28 +177,45 @@ export default function Home() {
           content="Naufal Saif, Jasa Pembuat Website, Web Developer, Fullstack Developer, Universitas Bina Insani"
           itemprop="keywords"
         />
-        {/* <meta
+        <meta
           name="thumbnailUrl"
-          content="https://akcdn.detik.net.id/logo_tematik/logodetiknews.png"
+          content={i18n.t("meta-og")}
           itemprop="thumbnailUrl"
-        /> */}
+        />
 
         <meta content={i18n.t("meta-url")} itemprop="url" />
         <link rel="canonical" href={i18n.t("meta-url")} />
-        {/* <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@detikcom" />
-        <meta name="twitter:site:id" content="@detikcom" />
-        <meta name="twitter:creator" content="@detikcom" /> */}
-        <meta name="twitter:description" content={i18n.t("meta-description")} />
-        {/* <meta
-          name="twitter:image"
-          content="https://akcdn.detik.net.id/logo_tematik/logodetiknews.png"
-        /> */}
-
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content={i18n.t("meta-twitter-username")} />
         <meta
+          name="twitter:site:id"
+          content={i18n.t("meta-twitter-username")}
+        />
+        <meta
+          name="twitter:creator"
+          content={i18n.t("meta-twitter-username")}
+        />
+        <meta name="twitter:description" content={i18n.t("meta-description")} />
+        <meta name="twitter:image" content={i18n.t("meta-og")} />
+
+        <Script
+          strategy="lazyOnload"
+          src="https://www.googletagmanager.com/gtag/js?id=G-6LH45X6JZ1"
+        />
+
+        <Script strategy="lazyOnload">
+          {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+      
+        gtag('config', 'G-6LH45X6JZ1');
+    `}
+        </Script>
+        {/* <meta
           name="google-site-verification"
           content="ocebThsbBPwqKbDyYpqk80QDwsaSZuqBLBgmP4KLVK8"
-        />
+        /> */}
         <link rel="icon" href="/naufal.ico" />
       </Head>
       <div className="bg-white text-slate-500 dark:bg-dark dark:text-light">
