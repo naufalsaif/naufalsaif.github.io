@@ -20,5 +20,15 @@
     "meta-description": "Naufal Saif adalah Web Developer menguasai Codeigniter, Laravel, Next.js dan menyediakan jasa pembuatan website",
     "meta-url": "https://naufalsaif.vercel.app/",
     "meta-og": "https://naufalsaif.vercel.app/og.png",
-    "meta-twitter-username": "@naufalsaif6"
+    "meta-twitter-username": "@naufalsaif6",
+    "aria-label-menu": "Buka atau tutup menu",
+    "aria-label-to-top": "Ke atas",
+    "aria-label-instagram": "Halaman Instagram",
+    "aria-label-github": "Halaman Github",
+    "aria-label-linkedin": "Halaman LinkedIn",
+    "deskripsi-tentang-saya": "Halo, perkenalkan nama saya M Naufal Saif Alfauzan. Saya tinggal di Bogor dan saat ini sedang menempuh pendidikan di Universitas Bina Insani dengan jurusan Teknik Informatika. Saya adalah seorang junior web developer yang bersemangat dalam menciptakan solusi kreatif melalui pengembangan website. Saya memiliki minat yang kuat dalam mempelajari teknologi terkini dan mengimplementasikannya dalam proyek-proyek yang saya kerjakan. Saya berharap dapat terus berkembang dalam bidang ini dan memberikan kontribusi yang berarti. Terima kasih!",
+    "judul-card-1": "Website Pengelolaan Keuangan Komplek",
+    "judul-card-2": "Website Pesan Rahasia",
+    "timeline-1": "Bersekolah di SMK ALBAHRI Kota Bekasi, mengambil jurusan Rekayasa Perangkat Lunak (RPL).",
+    "timeline-2": "Berkuliah di Universitas Bina Insani Kota Bekasi, mengambil jurusan Teknik Informatika."
 }

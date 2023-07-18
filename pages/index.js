@@ -24,7 +24,7 @@ import {
   BsFileEarmarkText,
   BsHourglass,
 } from "react-icons/bs";
-import { FaRegPaperPlane } from "react-icons/fa";
+import { FaLaravel, FaRegPaperPlane } from "react-icons/fa";
 import Slider from "react-slick";
 import {
   AiFillHtml5,
@@ -35,27 +35,36 @@ import {
 import { FaCss3Alt } from "react-icons/fa";
 import { RiArrowUpSLine } from "react-icons/ri";
 import { BiCopyright } from "react-icons/bi";
+import { IoLogoJavascript } from "react-icons/io";
+import { DiCodeigniter } from "react-icons/di";
 import { useRouter } from "next/router";
 import Script from "next/script";
+import { sendContactForm } from "@/lib/api";
+
+const initValues = {
+  name: "",
+  email: "",
+  subject: "Email From NaufalSaif WEB",
+  message: "",
+};
+
+const initState = { values: initValues };
 
 export default function Home() {
   const [navBar, setNavbar] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [hamburgerActive, setHamburgerActive] = useState(false);
   const [styleMessage, setStyleMessage] = useState(false);
+  const [styleEmail, setStyleEmail] = useState(false);
+  const [state, setState] = useState(initState);
+
+  const { values, isLoading, errorForm } = state;
 
   let menuRef = useRef();
   const router = useRouter();
   const { locale } = router;
 
   useEffect(() => {
-    document.body.classList.add("overflow-hidden");
-
-    setTimeout(() => {
-      document.body.classList.remove("overflow-hidden");
-      document.getElementById("loading").classList.add("hidden");
-    }, 1000);
-
     if (localStorage.theme === "dark") {
       setDarkMode(true);
     } else {
@@ -108,10 +117,54 @@ export default function Home() {
     };
   }, []);
 
-  const handleChangeMessage = (event) => {
-    event.target.value.length > 0
-      ? setStyleMessage(true)
-      : setStyleMessage(false);
+  const handleChangeMessage = ({ target }) => {
+    target.value.length > 0 ? setStyleMessage(true) : setStyleMessage(false);
+    setState((prev) => ({
+      ...prev,
+      values: {
+        ...prev.values,
+        [target.name]: target.value,
+      },
+    }));
+  };
+
+  const handleChangeEmail = ({ target }) => {
+    target.value.length > 0 ? setStyleEmail(true) : setStyleEmail(false);
+    setState((prev) => ({
+      ...prev,
+      values: {
+        ...prev.values,
+        [target.name]: target.value,
+      },
+    }));
+  };
+
+  const handleChangeContact = ({ target }) =>
+    setState((prev) => ({
+      ...prev,
+      values: {
+        ...prev.values,
+        [target.name]: target.value,
+      },
+    }));
+
+  const onSubmit = async () => {
+    setState((prev) => ({
+      ...prev,
+      isLoading: true,
+    }));
+    try {
+      await sendContactForm(values);
+      setState(initState);
+      setStyleEmail(false);
+      setStyleMessage(false);
+    } catch (error) {
+      setState((prev) => ({
+        ...prev,
+        isLoading: false,
+        errorForm: error.message,
+      }));
+    }
   };
 
   const settings = {
@@ -145,10 +198,10 @@ export default function Home() {
         <meta
           name="description"
           content={i18n.t("meta-description")}
-          itemprop="description"
+          itemProp="description"
         />
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="text/html; charset=UTF-8" />
+        <meta charSet="utf-8" />
+        <meta httpEquiv="X-UA-Compatible" content="text/html; charSet=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={i18n.t("naufalsaif")} />
@@ -160,7 +213,7 @@ export default function Home() {
         <meta
           name="copyright"
           content={i18n.t("hak-cipta-naufalsaif")}
-          itemprop="dateline"
+          itemProp="dateline"
         />
 
         <meta property="og:image:url" content={i18n.t("meta-og")} />
@@ -171,19 +224,19 @@ export default function Home() {
         <meta name="robots" content="index, follow" />
         <meta name="googlebot" content="index, follow" />
 
-        <meta content={i18n.t("meta-description")} itemprop="headline" />
+        <meta content={i18n.t("meta-description")} itemProp="headline" />
         <meta
           name="keywords"
           content="Naufal Saif, Jasa Pembuat Website, Web Developer, Fullstack Developer, Universitas Bina Insani"
-          itemprop="keywords"
+          itemProp="keywords"
         />
         <meta
           name="thumbnailUrl"
           content={i18n.t("meta-og")}
-          itemprop="thumbnailUrl"
+          itemProp="thumbnailUrl"
         />
 
-        <meta content={i18n.t("meta-url")} itemprop="url" />
+        <meta content={i18n.t("meta-url")} itemProp="url" />
         <link rel="canonical" href={i18n.t("meta-url")} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content={i18n.t("meta-twitter-username")} />
@@ -215,15 +268,6 @@ export default function Home() {
         <link rel="icon" href="/naufal.ico" />
       </Head>
       <div className="bg-white text-slate-500 dark:bg-dark dark:text-light">
-        <div
-          id="loading"
-          className="fixed z-[999] min-h-screen min-w-[100vw] bg-white dark:bg-dark flex justify-center items-center"
-        >
-          <div className="flex flex-col items-center text-xl text-primary">
-            <BsHourglass className="mb-2 text-3xl animate-spin" />
-            <h1 className="animate-pulse">Loading...</h1>
-          </div>
-        </div>
         <header
           ref={menuRef}
           className={`absolute top-0 left-0 z-10 flex w-full items-center bg-transparent lg:px-40 ${
@@ -238,6 +282,7 @@ export default function Home() {
             <div className="relative flex items-center justify-between">
               <div className="px-4 lg:px-0">
                 <a
+                  aria-label={`Website ${i18n.t("naufalsaif")}`}
                   href="#home"
                   className="block py-6 text-lg font-bold uppercase text-primary font-burtons"
                 >
@@ -246,6 +291,7 @@ export default function Home() {
               </div>
               <div className="flex items-center px-4 lg:px-0">
                 <button
+                  aria-label={i18n.t("aria-label-menu")}
                   id="hamburger"
                   name="hamburger"
                   type="button"
@@ -274,6 +320,7 @@ export default function Home() {
                   <ul className="block lg:flex">
                     <li className="group">
                       <a
+                        aria-label={i18n.t("beranda")}
                         href="#home"
                         className="flex py-2 mx-8 text-base lg:mx-7 text-dark dark:text-white group-hover:text-primary"
                       >
@@ -282,6 +329,7 @@ export default function Home() {
                     </li>
                     <li className="group">
                       <a
+                        aria-label={i18n.t("tentang-saya")}
                         href="#about"
                         className="flex py-2 mx-8 text-base lg:mx-7 text-dark dark:text-white group-hover:text-primary"
                       >
@@ -290,6 +338,7 @@ export default function Home() {
                     </li>
                     <li className="group">
                       <a
+                        aria-label={i18n.t("proyek")}
                         href="#projects"
                         className="flex py-2 mx-8 text-base lg:mx-7 text-dark dark:text-white group-hover:text-primary"
                       >
@@ -298,6 +347,7 @@ export default function Home() {
                     </li>
                     <li className="group">
                       <a
+                        aria-label={i18n.t("linimasa")}
                         href="#timeline"
                         className="flex py-2 mx-8 text-base lg:mx-7 text-dark dark:text-white group-hover:text-primary"
                       >
@@ -306,6 +356,7 @@ export default function Home() {
                     </li>
                     <li className="group">
                       <a
+                        aria-label={i18n.t("kontak")}
                         href="#kontak"
                         className="flex py-2 mx-8 text-base lg:mx-7 text-dark dark:text-white group-hover:text-primary"
                       >
@@ -368,7 +419,8 @@ export default function Home() {
           <div className="container">
             <div className="text-center">
               <h1 className="text-3xl font-medium md:text-4xl lg:text-5xl text-primary">
-                Muhammad Naufal
+                Muhammad Naufal{" "}
+                <div className="inline-block animate-fly">🚀</div>
               </h1>
               <h2 className="text-xl font-semibold md:text-2xl text-dark dark:text-white">
                 {i18n.t("pengembang-web")}
@@ -379,8 +431,9 @@ export default function Home() {
             </div>
             <div className="mt-3 text-center">
               <a
+                aria-label={i18n.t("mempekerjakan-saya")}
                 href="#kontak"
-                className="inline-block px-4 py-2 mt-4 text-sm font-medium text-white rounded-lg shadow bg-primary lg:text-base hover:opacity-80 shadow-primary"
+                className="inline-block px-4 py-2 mt-4 text-base font-medium text-white rounded-lg shadow-sm shadow-slate-300 dark:shadow-slate-600 bg-primary lg:text-base hover:opacity-80"
               >
                 {i18n.t("mempekerjakan-saya")}
               </a>
@@ -399,24 +452,19 @@ export default function Home() {
                 />
               </div>
               <div className="w-full md:w-2/3 lg:w-1/2">
-                <h1 className="relative text-xl lg:text-3xl text-primary mb-7 lg:mb-6 uppercase before:content-[''] before:absolute before:w-10 before:h-[2px] before:bg-primary before:top-12 before:left-0 after:content-[''] after:absolute after:w-20 after:h-[2px] after:bg-primary after:top-10 after:left-0">
+                <h1 className="relative text-xl lg:text-3xl text-primary mb-14 uppercase before:content-[''] before:absolute before:w-10 before:h-[2px] before:bg-primary before:top-12 before:left-0 after:content-[''] after:absolute after:w-20 after:h-[2px] after:bg-primary after:top-10 after:left-0">
                   {i18n.t("tentang-saya")}
                 </h1>
                 <h2 className="mb-4 text-3xl lg:text-5xl text-dark dark:text-white">
                   {i18n.t("saya-naufal")}
                 </h2>
                 <p className="text-base text-justify lg:text-lg text-slate-700 dark:text-light">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Veniam, adipisci aperiam. Animi, iure dolores quisquam debitis
-                  voluptatibus vitae culpa sed dolorum perspiciatis, fugit illum
-                  quidem ratione commodi veniam placeat maiores. Excepturi modi
-                  nemo molestiae rem earum aut veritatis nam, iste doloremque
-                  dolores autem, incidunt blanditiis eaque repudiandae, fugit
-                  minus tenetur?
+                  {i18n.t("deskripsi-tentang-saya")}
                 </p>
                 <a
+                  aria-label={i18n.t("unduh-cv")}
                   href="#"
-                  className="inline-block px-4 py-2 mt-4 text-sm font-medium text-white rounded-lg shadow-md bg-primary lg:text-base hover:opacity-80"
+                  className="inline-block px-4 py-2 mt-6 text-base font-medium text-white rounded-lg shadow-sm shadow-slate-300 dark:shadow-slate-600 bg-primary lg:text-base hover:opacity-80"
                 >
                   {i18n.t("unduh-cv")}{" "}
                   <BsFileEarmarkText className="inline-block mb-1" />
@@ -469,6 +517,7 @@ export default function Home() {
           </div>
         </section>
 
+        {/* color from simple icons */}
         <section id="projects" className="px-4 pt-24 pb-4">
           <div className="container">
             <div className="flex justify-center mb-4">
@@ -482,174 +531,77 @@ export default function Home() {
               <div className="shadow-lg dark:shadow-md rounded overflow-hidden w-full md:w-[340px] lg:w-[350px] dark:shadow-white">
                 <div className="w-full h-[250px] sm:h-[350px] image-card1"></div>
                 <div className="px-4 pt-2 pb-6">
-                  <h1 className="mb-3 text-lg font-semibold truncate lg:text-xl text-dark dark:text-white">
-                    Website Kocak Aja
+                  <h1 className="mb-3 text-lg font-semibold lg:text-xl text-dark dark:text-white">
+                    <a
+                      href="https://groupvista.000webhostapp.com/"
+                      target="_blank"
+                    >
+                      {i18n.t("judul-card-1")}
+                    </a>
                   </h1>
                   <div className="flex flex-wrap gap-1">
-                    <div className="bg-[#E34F26] text-sm lg:text-base px-3 py-1 text-white rounded-lg uppercase font-medium">
+                    <div className="bg-[#E34F26] text-base lg:text-base px-3 py-1 text-white rounded-lg uppercase font-medium">
                       <span className="flex items-center h-full gap-1">
                         <AiFillHtml5 />
                         html
                       </span>
                     </div>
-                    <div className="bg-[#1572B6] px-3 py-1 text-sm lg:text-base text-white rounded-lg uppercase font-medium">
+                    <div className="bg-[#1572B6] px-3 py-1 text-base lg:text-base text-white rounded-lg uppercase font-medium">
                       <span className="flex items-center h-full gap-1">
                         <FaCss3Alt />
                         css
+                      </span>
+                    </div>
+                    <div className="bg-[#F7DF1E] px-3 py-1 text-base lg:text-base text-white rounded-lg uppercase font-medium">
+                      <span className="flex items-center h-full gap-1">
+                        <IoLogoJavascript />
+                        javascript
+                      </span>
+                    </div>
+                    <div className="bg-[#EF4223] px-3 py-1 text-base lg:text-base text-white rounded-lg uppercase font-medium">
+                      <span className="flex items-center h-full gap-1">
+                        <DiCodeigniter />
+                        codeigniter
                       </span>
                     </div>
                   </div>
                 </div>
               </div>
+
               <div className="shadow-lg dark:shadow-md rounded overflow-hidden w-full md:w-[340px] lg:w-[350px] dark:shadow-white">
-                <div className="w-full h-[250px] sm:h-[350px] image-card1"></div>
+                <div className="w-full h-[250px] sm:h-[350px] image-card2"></div>
                 <div className="px-4 pt-2 pb-6">
                   <h1 className="mb-3 text-lg font-semibold lg:text-xl text-dark dark:text-white">
-                    Website Kocak Aja
+                    <a
+                      href="https://bisikin7.000webhostapp.com/"
+                      target="_blank"
+                    >
+                      {i18n.t("judul-card-2")}
+                    </a>
                   </h1>
                   <div className="flex flex-wrap gap-1">
-                    <div className="bg-[#E34F26] text-sm lg:text-base px-3 py-1 text-white rounded-lg uppercase font-medium">
+                    <div className="bg-[#E34F26] text-base lg:text-base px-3 py-1 text-white rounded-lg uppercase font-medium">
                       <span className="flex items-center h-full gap-1">
                         <AiFillHtml5 />
                         html
                       </span>
                     </div>
-                    <div className="bg-[#1572B6] px-3 py-1 text-sm lg:text-base text-white rounded-lg uppercase font-medium">
+                    <div className="bg-[#1572B6] px-3 py-1 text-base lg:text-base text-white rounded-lg uppercase font-medium">
                       <span className="flex items-center h-full gap-1">
                         <FaCss3Alt />
                         css
                       </span>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div className="shadow-lg dark:shadow-md rounded overflow-hidden w-full md:w-[340px] lg:w-[350px] dark:shadow-white">
-                <div className="w-full h-[250px] sm:h-[350px] image-card1"></div>
-                <div className="px-4 pt-2 pb-6">
-                  <h1 className="mb-3 text-lg font-semibold lg:text-xl text-dark dark:text-white">
-                    Website Kocak Aja
-                  </h1>
-                  <div className="flex flex-wrap gap-1">
-                    <div className="bg-[#E34F26] text-sm lg:text-base px-3 py-1 text-white rounded-lg uppercase font-medium">
+                    <div className="bg-[#F7DF1E] px-3 py-1 text-base lg:text-base text-white rounded-lg uppercase font-medium">
                       <span className="flex items-center h-full gap-1">
-                        <AiFillHtml5 />
-                        html
+                        <IoLogoJavascript />
+                        javascript
                       </span>
                     </div>
-                    <div className="bg-[#1572B6] px-3 py-1 text-sm lg:text-base text-white rounded-lg uppercase font-medium">
+                    <div className="bg-[#FF2D20] px-3 py-1 text-base lg:text-base text-white rounded-lg uppercase font-medium">
                       <span className="flex items-center h-full gap-1">
-                        <FaCss3Alt />
-                        css
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="shadow-lg dark:shadow-md rounded overflow-hidden w-full md:w-[340px] lg:w-[350px] dark:shadow-white">
-                <div className="w-full h-[250px] sm:h-[350px] image-card1"></div>
-                <div className="px-4 pt-2 pb-6">
-                  <h1 className="mb-3 text-lg font-semibold lg:text-xl text-dark dark:text-white">
-                    Website Kocak Aja
-                  </h1>
-                  <div className="flex flex-wrap gap-1">
-                    <div className="bg-[#E34F26] text-sm lg:text-base px-3 py-1 text-white rounded-lg uppercase font-medium">
-                      <span className="flex items-center h-full gap-1">
-                        <AiFillHtml5 />
-                        html
-                      </span>
-                    </div>
-                    <div className="bg-[#1572B6] px-3 py-1 text-sm lg:text-base text-white rounded-lg uppercase font-medium">
-                      <span className="flex items-center h-full gap-1">
-                        <FaCss3Alt />
-                        css
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="shadow-lg dark:shadow-md rounded overflow-hidden w-full md:w-[340px] lg:w-[350px] dark:shadow-white">
-                <div className="w-full h-[250px] sm:h-[350px] image-card1"></div>
-                <div className="px-4 pt-2 pb-6">
-                  <h1 className="mb-3 text-lg font-semibold lg:text-xl text-dark dark:text-white">
-                    Website Kocak Aja
-                  </h1>
-                  <div className="flex flex-wrap gap-1">
-                    <div className="bg-[#E34F26] text-sm lg:text-base px-3 py-1 text-white rounded-lg uppercase font-medium">
-                      <span className="flex items-center h-full gap-1">
-                        <AiFillHtml5 />
-                        html
-                      </span>
-                    </div>
-                    <div className="bg-[#1572B6] px-3 py-1 text-sm lg:text-base text-white rounded-lg uppercase font-medium">
-                      <span className="flex items-center h-full gap-1">
-                        <FaCss3Alt />
-                        css
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="shadow-lg dark:shadow-md rounded overflow-hidden w-full md:w-[340px] lg:w-[350px] dark:shadow-white">
-                <div className="w-full h-[250px] sm:h-[350px] image-card1"></div>
-                <div className="px-4 pt-2 pb-6">
-                  <h1 className="mb-3 text-lg font-semibold lg:text-xl text-dark dark:text-white">
-                    Website Kocak Aja
-                  </h1>
-                  <div className="flex flex-wrap gap-1">
-                    <div className="bg-[#E34F26] text-sm lg:text-base px-3 py-1 text-white rounded-lg uppercase font-medium">
-                      <span className="flex items-center h-full gap-1">
-                        <AiFillHtml5 />
-                        html
-                      </span>
-                    </div>
-                    <div className="bg-[#1572B6] px-3 py-1 text-sm lg:text-base text-white rounded-lg uppercase font-medium">
-                      <span className="flex items-center h-full gap-1">
-                        <FaCss3Alt />
-                        css
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="shadow-lg dark:shadow-md rounded overflow-hidden w-full md:w-[340px] lg:w-[350px] dark:shadow-white">
-                <div className="w-full h-[250px] sm:h-[350px] image-card1"></div>
-                <div className="px-4 pt-2 pb-6">
-                  <h1 className="mb-3 text-lg font-semibold lg:text-xl text-dark dark:text-white">
-                    Website Kocak Aja
-                  </h1>
-                  <div className="flex flex-wrap gap-1">
-                    <div className="bg-[#E34F26] text-sm lg:text-base px-3 py-1 text-white rounded-lg uppercase font-medium">
-                      <span className="flex items-center h-full gap-1">
-                        <AiFillHtml5 />
-                        html
-                      </span>
-                    </div>
-                    <div className="bg-[#1572B6] px-3 py-1 text-sm lg:text-base text-white rounded-lg uppercase font-medium">
-                      <span className="flex items-center h-full gap-1">
-                        <FaCss3Alt />
-                        css
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="shadow-lg dark:shadow-md rounded overflow-hidden w-full md:w-[340px] lg:w-[350px] dark:shadow-white">
-                <div className="w-full h-[250px] sm:h-[350px] image-card1"></div>
-                <div className="px-4 pt-2 pb-6">
-                  <h1 className="mb-3 text-lg font-semibold lg:text-xl text-dark dark:text-white">
-                    Website Kocak Aja
-                  </h1>
-                  <div className="flex flex-wrap gap-1">
-                    <div className="bg-[#E34F26] text-sm lg:text-base px-3 py-1 text-white rounded-lg uppercase font-medium">
-                      <span className="flex items-center h-full gap-1">
-                        <AiFillHtml5 />
-                        html
-                      </span>
-                    </div>
-                    <div className="bg-[#1572B6] px-3 py-1 text-sm lg:text-base text-white rounded-lg uppercase font-medium">
-                      <span className="flex items-center h-full gap-1">
-                        <FaCss3Alt />
-                        css
+                        <FaLaravel />
+                        laravel
                       </span>
                     </div>
                   </div>
@@ -683,13 +635,11 @@ export default function Home() {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm font-medium lg:text-base text-primary">
-                    18-8-2022
+                  <p className="text-base font-medium lg:text-base text-primary">
+                    2021 - Sekarang
                   </p>
                   <p className="mt-1 text-base text-slate-700 dark:text-light lg:text-lg">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Maiores incidunt blanditiis dignissimos, enim earum
-                    mollitia.
+                    {i18n.t("timeline-2")}
                   </p>
                 </div>
               </li>
@@ -706,40 +656,11 @@ export default function Home() {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm font-medium lg:text-base text-primary">
-                    18-8-2022
+                  <p className="text-base font-medium lg:text-base text-primary">
+                    2017 - 2020
                   </p>
                   <p className="mt-1 text-base text-slate-700 dark:text-light lg:text-lg">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Magni fugit, iusto animi nihil officiis odio autem harum,
-                    rem eaque dignissimos consequatur voluptas optio ab! Commodi
-                    totam autem sequi modi sunt nihil rerum quae ex, nam eos
-                    iste cumque a delectus.
-                  </p>
-                </div>
-              </li>
-              <li className="relative flex items-baseline gap-6 pb-5">
-                <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="12"
-                    height="12"
-                    className="bi bi-circle-fill fill-primary"
-                    viewBox="0 0 16 16"
-                  >
-                    <circle cx="8" cy="8" r="8" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-sm font-medium lg:text-base text-primary">
-                    18-8-2022
-                  </p>
-                  <p className="mt-1 text-base text-slate-700 dark:text-light lg:text-lg">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Corporis placeat quod aliquid aliquam ipsum! Quae soluta
-                    recusandae exercitationem, possimus quisquam eveniet
-                    explicabo expedita? Ipsa, deserunt quo quas officiis dolorem
-                    optio.
+                    {i18n.t("timeline-1")}
                   </p>
                 </div>
               </li>
@@ -753,40 +674,64 @@ export default function Home() {
           >
             {i18n.t("hubungi-saya")}
           </h1>
-          <div className="w-full lg:w-1/3">
+          {errorForm && (
+            <div className="w-1/3 p-3 mb-5 -mt-2 bg-red-200 rounded text-dark">
+              {errorForm}
+            </div>
+          )}
+          <form method="POST" action="#" className="w-full lg:w-1/3">
             <div className="relative w-full h-[45px] lg:h-[50px] mb-6">
               <input
                 type="text"
                 className="absolute w-full h-full px-4 tracking-wide transition-all duration-200 ease-linear border border-solid rounded-lg outline-none border-slate-400 peer focus:border-primary focus:ring-2 valid:border-primary valid:ring-2 dark:text-white dark:bg-dark"
+                name="name"
+                onChange={handleChangeContact}
                 required
+                value={values.name}
               />
-              <label className="absolute text-sm tracking-wide transition-all duration-200 ease-in-out -translate-y-1/2 lg:text-base text-light dark:text-white top-1/2 left-4 peer-focus:top-0 peer-focus:bg-white dark:peer-focus:bg-dark peer-focus:px-1 peer-focus:text-primary peer-valid:top-0 peer-valid:bg-white dark:peer-valid:bg-dark peer-valid:px-1 peer-valid:text-primary">
+              <label className="absolute text-base tracking-wide transition-all duration-200 ease-in-out -translate-y-1/2 lg:text-base text-light dark:text-white top-1/2 left-4 peer-focus:top-0 peer-focus:bg-white dark:peer-focus:bg-dark peer-focus:px-1 peer-focus:text-primary peer-valid:top-0 peer-valid:bg-white dark:peer-valid:bg-dark peer-valid:px-1 peer-valid:text-primary autofill:bg-red-300">
                 {i18n.t("nama")}
               </label>
             </div>
             <div className="relative w-full h-[45px] lg:h-[50px] mb-6">
               <input
-                type="text"
-                className="absolute w-full h-full px-4 tracking-wide transition-all duration-200 ease-linear border border-solid rounded-lg outline-none border-slate-400 peer focus:border-primary focus:ring-2 valid:border-primary valid:ring-2 dark:text-white dark:bg-dark"
+                type="email"
+                className={`absolute w-full h-full px-4 tracking-wide transition-all duration-200 ease-linear border border-solid rounded-lg outline-none border-slate-400 peer focus:border-primary focus:ring-2 ${
+                  !styleEmail
+                    ? "border-light ring-0"
+                    : "border-primary ring-2 dark:border-primary"
+                }  dark:text-white dark:bg-dark`}
                 required
+                name="email"
+                onChange={handleChangeEmail}
+                value={values.email}
               />
-              <label className="absolute text-sm tracking-wide transition-all duration-200 ease-in-out -translate-y-1/2 lg:text-base text-light dark:text-white top-1/2 left-4 peer-focus:top-0 peer-focus:bg-white dark:peer-focus:bg-dark peer-focus:px-1 peer-focus:text-primary peer-valid:top-0 peer-valid:bg-white dark:peer-valid:bg-dark peer-valid:px-1 peer-valid:text-primary">
+              <label
+                className={`absolute text-base tracking-wide transition-all duration-200 ease-in-out -translate-y-1/2 lg:text-base text-light top-1/2 left-4 peer-focus:top-0 peer-focus:bg-white dark:peer-focus:bg-dark peer-focus:px-1 peer-focus:text-primary 
+                ${
+                  !styleEmail
+                    ? "text-light dark:text-white px-0"
+                    : "top-[0px] bg-white dark:bg-dark px-1 text-primary dark:text-primary"
+                }`}
+              >
                 Email
               </label>
             </div>
             <div className="relative w-full h-[135px] lg:h-[150px] mb-6">
               <textarea
                 id="pesan"
-                name="pesan"
                 onChange={handleChangeMessage}
                 className={`absolute h-full w-full outline-none border border-solid rounded-lg transition-all duration-200 ease-linear px-4 peer focus:border-primary focus:ring-2 dark:text-white dark:bg-dark ${
                   !styleMessage
                     ? "border-light ring-0"
                     : "border-primary ring-2"
                 } tracking-wide py-3`}
+                required
+                name="message"
+                value={values.message}
               ></textarea>
               <label
-                className={`absolute text-sm lg:text-base -translate-y-1/2 transition-all duration-200 ease-in-out left-4 bg-white peer-focus:top-0  peer-focus:px-1 peer-focus:text-primary dark:peer-focus:bg-dark dark:bg-dark ${
+                className={`absolute text-base lg:text-base -translate-y-1/2 transition-all duration-200 ease-in-out left-4 bg-white peer-focus:top-0  peer-focus:px-1 peer-focus:text-primary dark:peer-focus:bg-dark dark:bg-dark ${
                   !styleMessage
                     ? "text-light dark:text-white top-[15%] px-0 "
                     : "top-0  px-1 text-primary dark:bg-dark"
@@ -795,17 +740,36 @@ export default function Home() {
                 {i18n.t("pesan")}
               </label>
             </div>
-            <a
-              href="#"
-              className="inline-block px-4 py-2 text-sm font-medium text-white rounded-lg shadow-md bg-primary lg:text-base hover:opacity-80"
+            <button
+              aria-label={i18n.t("kirim-pesan")}
+              type="button"
+              onClick={onSubmit}
+              disabled={
+                !values.name || !values.email || !values.message || isLoading
+              }
+              className={`inline-block px-4 py-2 text-base font-medium text-white rounded-lg shadow-sm shadow-slate-300 dark:shadow-slate-600 bg-primary lg:text-base hover:opacity-80 ${
+                !values.name || !values.email || !values.message || isLoading
+                  ? "cursor-not-allowed"
+                  : ""
+              }`}
             >
-              {i18n.t("kirim-pesan")}{" "}
-              <FaRegPaperPlane className="inline-block mb-1" />
-            </a>
-          </div>
+              {!isLoading ? (
+                <>
+                  {i18n.t("kirim-pesan")}
+                  <FaRegPaperPlane className="inline-block mb-1 ml-1" />
+                </>
+              ) : (
+                <div className="flex">
+                  <BsHourglass className="mt-1 mr-1 animate-spin" />
+                  <span className="animate-pulse">Loading...</span>{" "}
+                </div>
+              )}
+            </button>
+          </form>
         </section>
 
         <a
+          aria-label={i18n.t("aria-label-to-top")}
           href="#home"
           className={`fixed bottom-4 right-4 lg:bottom-6 lg:right-6 z-[99] ${
             !navBar ? "hidden" : ""
@@ -824,17 +788,32 @@ export default function Home() {
                 {i18n.t("naufalsaif")}
               </h1>
               <div className="flex flex-wrap justify-center w-full gap-4 pb-5 lg:gap-6 lg:pb-6">
-                <div className="bg-[#E4405F] w-8 h-8 lg:w-10 lg:h-10 rounded-full flex justify-center items-center hover:cursor-pointer shadow hover:scale-110 transition duration-200 ease-linear">
+                <a
+                  aria-label={i18n.t("aria-label-instagram")}
+                  target="_blank"
+                  href="https://www.instagram.com/nov06al"
+                  className="bg-[#E4405F] w-8 h-8 lg:w-10 lg:h-10 rounded-full flex justify-center items-center hover:cursor-pointer shadow hover:scale-110 transition duration-200 ease-linear"
+                >
                   <AiOutlineInstagram className="text-xl text-white lg:text-2xl dark:text-slate-100" />
-                </div>
-                <div className="bg-[#181717] w-8 h-8 lg:w-10 lg:h-10 rounded-full flex justify-center items-center hover:cursor-pointer shadow hover:scale-110 transition duration-200 ease-linear">
+                </a>
+                <a
+                  aria-label={i18n.t("aria-label-github")}
+                  target="_blank"
+                  href="https://github.com/naufalsaif"
+                  className="bg-[#181717] w-8 h-8 lg:w-10 lg:h-10 rounded-full flex justify-center items-center hover:cursor-pointer shadow hover:scale-110 transition duration-200 ease-linear"
+                >
                   <AiOutlineGithub className="text-xl text-white lg:text-2xl dark:text-slate-100" />
-                </div>
-                <div className="bg-[#0A66C2] w-8 h-8 lg:w-10 lg:h-10 rounded-full flex justify-center items-center hover:cursor-pointer shadow hover:scale-110 transition duration-200 ease-linear">
+                </a>
+                <a
+                  aria-label={i18n.t("aria-label-linkedin")}
+                  target="_blank"
+                  href="https://www.linkedin.com/in/m-naufal-saif-alfauzan-2373b3260"
+                  className="bg-[#0A66C2] w-8 h-8 lg:w-10 lg:h-10 rounded-full flex justify-center items-center hover:cursor-pointer shadow hover:scale-110 transition duration-200 ease-linear"
+                >
                   <AiOutlineLinkedin className="text-xl text-white lg:text-2xl dark:text-slate-100" />
-                </div>
+                </a>
               </div>
-              <span className="flex items-center text-sm font-normal tracking-wide text-white dark:text-slate-100 lg:text-base">
+              <span className="flex items-center text-base font-normal tracking-wide text-white dark:text-slate-100 lg:text-base">
                 <BiCopyright /> {i18n.t("hak-cipta-naufalsaif")}
               </span>
             </div>

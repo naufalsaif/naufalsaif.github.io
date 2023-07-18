@@ -20,5 +20,15 @@
     "meta-description": "Naufal Saif is a Web Developer who masters Codeigniter, Laravel, Next.js and provides website creation services",
     "meta-url": "https://naufalsaif.vercel.app/",
     "meta-og": "https://naufalsaif.vercel.app/og.png",
-    "meta-twitter-username": "@naufalsaif6"
+    "meta-twitter-username": "@naufalsaif6",
+    "aria-label-menu": "Open or close menu",
+    "aria-label-to-top": "To the top",
+    "aria-label-instagram": "Instagram page",
+    "aria-label-github": "Github page",
+    "aria-label-linkedin": "LinkedIn page",
+    "deskripsi-tentang-saya": "Hello, let me introduce myself. My name is M Naufal Saif Alfauzan. I live in Bogor and currently I am studying at Bina Insani University, majoring in Informatics Engineering. I am a junior web developer who is passionate about creating creative solutions through website development. I have a strong interest in learning the latest technologies and implementing them in my projects. I hope to continue growing in this field and make meaningful contributions. Thank you!",
+    "judul-card-1": "Housing Finance Management Website",
+    "judul-card-2": "Secret Message Website",
+    "timeline-1": "Attended SMK ALBAHRI Bekasi City, majoring in Software Engineering.",
+    "timeline-2": "Studying at Bina Insani University Bekasi City, majoring in Informatics Engineering."
 }
