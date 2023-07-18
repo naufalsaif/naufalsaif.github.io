@@ -41,12 +41,26 @@ const handler = async (req, res) => {
   }
 
   try {
-    await transporter.sendMail({
-      ...mailOptions,
-      ...generateEmailContent(data),
-      subject: data.subject,
+    await new Promise((resolve, reject) => {
+      transporter.sendMail(
+        {
+          ...mailOptions,
+          ...generateEmailContent(data),
+          subject: data.subject,
+        },
+        (err, info) => {
+          if (err) {
+            reject(err);
+            res.status(400).json({ message: err });
+          } else {
+            resolve(info);
+            res.status(200).json({ success: true, message: "Sukses terkirim" });
+          }
+        }
+      );
     });
-    return res.status(200).json({ success: true, message: "Sukses terkirim" });
+
+    // return res.status(200).json({ success: true, message: "Sukses terkirim" });
   } catch (error) {
     console.log(error);
     return res.status(400).json({ message: error.message });
