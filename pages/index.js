@@ -1,19 +1,19 @@
 import Head from "next/head";
 import i18n from "../i18n";
-import gambar1 from "../public/naufal.png";
-import gambar2 from "../public/laptop.jpg";
-import logo1 from "../public/html.png";
-import logo2 from "../public/css.png";
-import logo3 from "../public/js.png";
-import logo4 from "../public/php.png";
-import logo5 from "../public/laravel.png";
-import logo6 from "../public/codeigniter.png";
-import logo7 from "../public/nodejs.png";
-import logo8 from "../public/reactjs.png";
-import logo9 from "../public/nextjs.png";
-import logo10 from "../public/express.png";
-import logo11 from "../public/mysql.png";
-import logo12 from "../public/mongodb.png";
+import gambar1 from "../public/naufal.webp";
+import gambar2 from "../public/laptop.webp";
+import logo1 from "../public/html.webp";
+import logo2 from "../public/css.webp";
+import logo3 from "../public/js.webp";
+import logo4 from "../public/php.webp";
+import logo5 from "../public/laravel.webp";
+import logo6 from "../public/codeigniter.webp";
+import logo7 from "../public/nodejs.webp";
+import logo8 from "../public/reactjs.webp";
+import logo9 from "../public/nextjs.webp";
+import logo10 from "../public/express.webp";
+import logo11 from "../public/mysql.webp";
+import logo12 from "../public/mongodb.webp";
 import flagid from "../public/id.svg";
 import flagen from "../public/gb.svg";
 import Image from "next/image";
@@ -40,6 +40,7 @@ import { DiCodeigniter } from "react-icons/di";
 import { useRouter } from "next/router";
 import Script from "next/script";
 import { sendContactForm } from "@/lib/api";
+import { toast } from "react-toastify";
 
 const initValues = {
   name: "",
@@ -63,6 +64,7 @@ export default function Home() {
   let menuRef = useRef();
   const router = useRouter();
   const { locale } = router;
+  const themeToast = darkMode ? "dark" : "light";
 
   useEffect(() => {
     if (localStorage.theme === "dark") {
@@ -117,6 +119,32 @@ export default function Home() {
     };
   }, []);
 
+  const messageToast = (type, message) => {
+    if (type == "success") {
+      toast.success(message, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: themeToast,
+      });
+    } else {
+      toast.error(message, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: themeToast,
+      });
+    }
+  };
+
   const handleChangeMessage = ({ target }) => {
     target.value.length > 0 ? setStyleMessage(true) : setStyleMessage(false);
     setState((prev) => ({
@@ -139,6 +167,15 @@ export default function Home() {
     }));
   };
 
+  const handleBlurEmail = ({ target }) => {
+    const emailValue = target.value;
+    const emailRegex =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (!emailValue.match(emailRegex)) {
+      messageToast("error", "Email tidak valid!");
+    }
+  };
+
   const handleChangeContact = ({ target }) =>
     setState((prev) => ({
       ...prev,
@@ -158,12 +195,14 @@ export default function Home() {
       setState(initState);
       setStyleEmail(false);
       setStyleMessage(false);
+      messageToast("success", "Pesan berhasil terkirim!");
     } catch (error) {
       setState((prev) => ({
         ...prev,
         isLoading: false,
         errorForm: error.message,
       }));
+      messageToast("error", error.message);
     }
   };
 
@@ -674,11 +713,6 @@ export default function Home() {
           >
             {i18n.t("hubungi-saya")}
           </h1>
-          {errorForm && (
-            <div className="w-1/3 p-3 mb-5 -mt-2 bg-red-200 rounded text-dark">
-              {errorForm}
-            </div>
-          )}
           <form method="POST" action="#" className="w-full lg:w-1/3">
             <div className="relative w-full h-[45px] lg:h-[50px] mb-6">
               <input
@@ -696,7 +730,7 @@ export default function Home() {
             <div className="relative w-full h-[45px] lg:h-[50px] mb-6">
               <input
                 type="email"
-                className={`absolute w-full h-full px-4 tracking-wide transition-all duration-200 ease-linear border border-solid rounded-lg outline-none border-slate-400 peer focus:border-primary focus:ring-2 ${
+                className={`absolute w-full h-full px-4 tracking-wide transition-all duration-200 ease-linear border border-solid rounded-lg outline-none peer focus:border-primary focus:ring-2 ${
                   !styleEmail
                     ? "border-light ring-0"
                     : "border-primary ring-2 dark:border-primary"
@@ -704,6 +738,7 @@ export default function Home() {
                 required
                 name="email"
                 onChange={handleChangeEmail}
+                onBlur={handleBlurEmail}
                 value={values.email}
               />
               <label
@@ -760,8 +795,27 @@ export default function Home() {
                 </>
               ) : (
                 <div className="flex">
-                  <BsHourglass className="mt-1 mr-1 animate-spin" />
-                  <span className="animate-pulse">Loading...</span>{" "}
+                  <svg
+                    class="mr-2 mt-[2px] h-5 w-5 animate-spin text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      class="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      stroke-width="4"
+                    ></circle>
+                    <path
+                      class="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                  <span className="animate-pulse">Loading...</span>
                 </div>
               )}
             </button>

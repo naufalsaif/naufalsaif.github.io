@@ -42,13 +42,13 @@
 } */
 
 .image-card1 {
-	background-image: url('../public/pengelolaan-keuangan.png');
+	background-image: url('../public/pengelolaan-keuangan.webp');
 	background-size: cover;
 	background-repeat: no-repeat;
 	transition: all ease-in-out 3s;
 }
 .image-card2 {
-	background-image: url('../public/pesan-rahasia.png');
+	background-image: url('../public/pesan-rahasia.webp');
 	background-size: cover;
 	background-repeat: no-repeat;
 	transition: all ease-in-out 3s;
@@ -75,65 +75,195 @@ input:-webkit-autofill:active{
     -webkit-text-fill-color: rgb(255 255 255);
 }
 @keyframes fly {
-	/* 1 */
+	/* 1 ok */
 	5% {
 		transform: translate(-20px, 20px);
 	}
-	/* 2 */
+	/* 2 ok */
 	10% {
 		transform: translate(20px, -20px);
 	}
-	/* 3 */
+	/* 3 ok */
 	15% {
-		transform: translate(20px, -60px) rotate(-70deg);
+		transform: translate(20px, -40px) rotate(-70deg);
 	}
-	/* 4 */
+	/* 4 ok */
 	20% {
-		transform: translate(0px, -60px) rotate(-135deg);
+		transform: translate(0px, -40px) rotate(-135deg);
 	}
-	/* 5 */
+	/* 5 ok */
 	35% {
-		transform: translate(-450px, -60px) rotate(-135deg);
+		transform: translate(-290px, -40px) rotate(-135deg);
 	}
-	/* 6 */
+	/* 6 ok */
 	40% {
-		transform: translate(-500px, -40px) rotate(-170deg);
+		transform: translate(-310px, -40px) rotate(-170deg);
 	}
-	/* 7 */
+	/* 7 ok */
 	45% {
-		transform: translate(-500px, -30px) rotate(-225deg);
+		transform: translate(-310px, -30px) rotate(-225deg);
 	}
-	/* 8 */
+	/* 8 ok */
 	50% {
-		transform: translate(-500px, 40px) rotate(-225deg);
+		transform: translate(-310px, 40px) rotate(-225deg);
 	}
-	/* 9 */
+	/* 9 ok */
 	55% {
-		transform: translate(-490px, 50px) rotate(-270deg);
+		transform: translate(-300px, 50px) rotate(-270deg);
 	}
-	/* 10 */
+	/* 10 ok */
 	60% {
-		transform: translate(-460px, 70px) rotate(-315deg);
+		transform: translate(-270px, 60px) rotate(-315deg);
 	}
-	/* 11 */
+	/* 11 ok */
 	75% {
-		transform: translate(-50px, 70px) rotate(-315deg);
+		transform: translate(-50px, 60px) rotate(-315deg);
 	}
-	/* 12 */
+	/* 12 ok */
 	80% {
-		transform: translate(-30px, 60px) rotate(-360deg);
+		transform: translate(-30px, 50px) rotate(-360deg);
 	}
-	/* 13 */
+	/* 13 ok */
 	85% {
-		transform: translate(-20px, 50px) rotate(-405deg);
+		transform: translate(-10px, 40px) rotate(-405deg);
 	}
 	/* 14 */
 	90% {
-		transform: translate(-20px, 30px) rotate(-405deg);
+		transform: translate(-10px, 20px) rotate(-405deg);
 	} 
 	/* 15 */
 	95% {
 		transform: rotate(0);
+	}
+}
+/* tablet */
+@media only screen and (min-width: 768px) {
+	@keyframes fly {
+		/* 1 */
+		5% {
+			transform: translate(-20px, 20px);
+		}
+		/* 2 */
+		10% {
+			transform: translate(20px, -20px);
+		}
+		/* 3 */
+		15% {
+			transform: translate(20px, -60px) rotate(-70deg);
+		}
+		/* 4 */
+		20% {
+			transform: translate(0px, -60px) rotate(-135deg);
+		}
+		/* 5 */
+		35% {
+			transform: translate(-320px, -60px) rotate(-135deg);
+		}
+		/* 6 */
+		40% {
+			transform: translate(-370px, -40px) rotate(-170deg);
+		}
+		/* 7 */
+		45% {
+			transform: translate(-370px, -30px) rotate(-225deg);
+		}
+		/* 8 */
+		50% {
+			transform: translate(-370px, 40px) rotate(-225deg);
+		}
+		/* 9 */
+		55% {
+			transform: translate(-360px, 50px) rotate(-270deg);
+		}
+		/* 10 */
+		60% {
+			transform: translate(-330px, 70px) rotate(-315deg);
+		}
+		/* 11 */
+		75% {
+			transform: translate(-50px, 70px) rotate(-315deg);
+		}
+		/* 12 */
+		80% {
+			transform: translate(-30px, 60px) rotate(-360deg);
+		}
+		/* 13 */
+		85% {
+			transform: translate(-20px, 50px) rotate(-405deg);
+		}
+		/* 14 */
+		90% {
+			transform: translate(-20px, 30px) rotate(-405deg);
+		} 
+		/* 15 */
+		95% {
+			transform: rotate(0);
+		}
+	}
+}
+/* dekstop */
+@media only screen and (min-width: 1024px) {
+	@keyframes fly {
+		/* 1 */
+		5% {
+			transform: translate(-20px, 20px);
+		}
+		/* 2 */
+		10% {
+			transform: translate(20px, -20px);
+		}
+		/* 3 */
+		15% {
+			transform: translate(20px, -60px) rotate(-70deg);
+		}
+		/* 4 */
+		20% {
+			transform: translate(0px, -60px) rotate(-135deg);
+		}
+		/* 5 */
+		35% {
+			transform: translate(-450px, -60px) rotate(-135deg);
+		}
+		/* 6 */
+		40% {
+			transform: translate(-500px, -40px) rotate(-170deg);
+		}
+		/* 7 */
+		45% {
+			transform: translate(-500px, -30px) rotate(-225deg);
+		}
+		/* 8 */
+		50% {
+			transform: translate(-500px, 40px) rotate(-225deg);
+		}
+		/* 9 */
+		55% {
+			transform: translate(-490px, 50px) rotate(-270deg);
+		}
+		/* 10 */
+		60% {
+			transform: translate(-460px, 70px) rotate(-315deg);
+		}
+		/* 11 */
+		75% {
+			transform: translate(-50px, 70px) rotate(-315deg);
+		}
+		/* 12 */
+		80% {
+			transform: translate(-30px, 60px) rotate(-360deg);
+		}
+		/* 13 */
+		85% {
+			transform: translate(-20px, 50px) rotate(-405deg);
+		}
+		/* 14 */
+		90% {
+			transform: translate(-20px, 30px) rotate(-405deg);
+		} 
+		/* 15 */
+		95% {
+			transform: rotate(0);
+		}
 	}
 }
 .animate-fly {
