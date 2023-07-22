@@ -57,6 +57,7 @@ export default function Home() {
   const [hamburgerActive, setHamburgerActive] = useState(false);
   const [styleMessage, setStyleMessage] = useState(false);
   const [styleEmail, setStyleEmail] = useState(false);
+  const [validEmail, setValidEmail] = useState(true);
   const [state, setState] = useState(initState);
 
   const { values, isLoading, errorForm } = state;
@@ -172,7 +173,10 @@ export default function Home() {
     const emailRegex =
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (!emailValue.match(emailRegex)) {
+      setValidEmail(true);
       messageToast("error", "Email tidak valid!");
+    } else {
+      setValidEmail(false);
     }
   };
 
@@ -716,6 +720,7 @@ export default function Home() {
           <form method="POST" action="#" className="w-full lg:w-1/3">
             <div className="relative w-full h-[45px] lg:h-[50px] mb-6">
               <input
+                aria-labelledby="label-name"
                 type="text"
                 className="absolute w-full h-full px-4 tracking-wide transition-all duration-200 ease-linear border border-solid rounded-lg outline-none border-slate-400 peer focus:border-primary focus:ring-2 valid:border-primary valid:ring-2 dark:text-white dark:bg-dark"
                 name="name"
@@ -723,12 +728,16 @@ export default function Home() {
                 required
                 value={values.name}
               />
-              <label className="absolute text-base tracking-wide transition-all duration-200 ease-in-out -translate-y-1/2 lg:text-base text-light dark:text-white top-1/2 left-4 peer-focus:top-0 peer-focus:bg-white dark:peer-focus:bg-dark peer-focus:px-1 peer-focus:text-primary peer-valid:top-0 peer-valid:bg-white dark:peer-valid:bg-dark peer-valid:px-1 peer-valid:text-primary autofill:bg-red-300">
+              <label
+                id="label-name"
+                className="absolute text-base tracking-wide transition-all duration-200 ease-in-out -translate-y-1/2 lg:text-base text-light dark:text-white top-1/2 left-4 peer-focus:top-0 peer-focus:bg-white dark:peer-focus:bg-dark peer-focus:px-1 peer-focus:text-primary peer-valid:top-0 peer-valid:bg-white dark:peer-valid:bg-dark peer-valid:px-1 peer-valid:text-primary autofill:bg-red-300"
+              >
                 {i18n.t("nama")}
               </label>
             </div>
             <div className="relative w-full h-[45px] lg:h-[50px] mb-6">
               <input
+                aria-labelledby="label-email"
                 type="email"
                 className={`absolute w-full h-full px-4 tracking-wide transition-all duration-200 ease-linear border border-solid rounded-lg outline-none peer focus:border-primary focus:ring-2 ${
                   !styleEmail
@@ -742,6 +751,7 @@ export default function Home() {
                 value={values.email}
               />
               <label
+                id="label-email"
                 className={`absolute text-base tracking-wide transition-all duration-200 ease-in-out -translate-y-1/2 lg:text-base text-light top-1/2 left-4 peer-focus:top-0 peer-focus:bg-white dark:peer-focus:bg-dark peer-focus:px-1 peer-focus:text-primary 
                 ${
                   !styleEmail
@@ -754,6 +764,7 @@ export default function Home() {
             </div>
             <div className="relative w-full h-[135px] lg:h-[150px] mb-6">
               <textarea
+                aria-labelledby="label-message"
                 id="pesan"
                 onChange={handleChangeMessage}
                 className={`absolute h-full w-full outline-none border border-solid rounded-lg transition-all duration-200 ease-linear px-4 peer focus:border-primary focus:ring-2 dark:text-white dark:bg-dark ${
@@ -766,6 +777,7 @@ export default function Home() {
                 value={values.message}
               ></textarea>
               <label
+                id="label-message"
                 className={`absolute text-base lg:text-base -translate-y-1/2 transition-all duration-200 ease-in-out left-4 bg-white peer-focus:top-0  peer-focus:px-1 peer-focus:text-primary dark:peer-focus:bg-dark dark:bg-dark ${
                   !styleMessage
                     ? "text-light dark:text-white top-[15%] px-0 "
@@ -780,10 +792,18 @@ export default function Home() {
               type="button"
               onClick={onSubmit}
               disabled={
-                !values.name || !values.email || !values.message || isLoading
+                !values.name ||
+                !values.email ||
+                !values.message ||
+                isLoading ||
+                validEmail
               }
               className={`inline-block px-4 py-2 text-base font-medium text-white rounded-lg shadow-sm shadow-slate-300 dark:shadow-slate-600 bg-primary lg:text-base hover:opacity-80 ${
-                !values.name || !values.email || !values.message || isLoading
+                !values.name ||
+                !values.email ||
+                !values.message ||
+                isLoading ||
+                validEmail
                   ? "cursor-not-allowed"
                   : ""
               }`}
