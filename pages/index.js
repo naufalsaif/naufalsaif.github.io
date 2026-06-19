@@ -313,13 +313,11 @@ export default function Home() {
       <div className="bg-white text-slate-500 dark:bg-dark dark:text-light">
         <header
           ref={menuRef}
-          className={`absolute top-0 left-0 z-10 flex w-full items-center bg-transparent lg:px-40 ${
-            navBar
-              ? `${
-                  darkMode ? "navbar-fixed-dark" : "navbar-fixed"
-                } bg-white bg-opacity-70 backdrop-blur-sm dark:bg-dark dark:bg-opacity-50`
+          className={`absolute top-0 left-0 z-10 flex w-full items-center bg-transparent lg:px-40 ${navBar
+              ? `${darkMode ? "navbar-fixed-dark" : "navbar-fixed"
+              } bg-white bg-opacity-70 backdrop-blur-sm dark:bg-dark dark:bg-opacity-50`
               : ""
-          } `}
+            } `}
         >
           <div className="container">
             <div className="relative flex items-center justify-between">
@@ -338,9 +336,8 @@ export default function Home() {
                   id="hamburger"
                   name="hamburger"
                   type="button"
-                  className={`absolute right-4 block lg:hidden ${
-                    hamburgerActive ? "hamburger-active" : ""
-                  }`}
+                  className={`absolute right-4 block lg:hidden ${hamburgerActive ? "hamburger-active" : ""
+                    }`}
                   onClick={() => setHamburgerActive(!hamburgerActive)}
                 >
                   <span
@@ -356,9 +353,8 @@ export default function Home() {
 
                 <nav
                   id="nav-menu"
-                  className={`absolute right-4 top-full w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg dark:bg-dark dark:shadow-slate-500 lg:static lg:block lg:max-w-full lg:rounded-none lg:bg-transparent lg:shadow-none lg:dark:bg-transparent ${
-                    !hamburgerActive ? "hidden" : ""
-                  }`}
+                  className={`absolute right-4 top-full w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg dark:bg-dark dark:shadow-slate-500 lg:static lg:block lg:max-w-full lg:rounded-none lg:bg-transparent lg:shadow-none lg:dark:bg-transparent ${!hamburgerActive ? "hidden" : ""
+                    }`}
                 >
                   <ul className="block lg:flex">
                     <li className="group">
@@ -418,21 +414,18 @@ export default function Home() {
                         <label htmlFor="dark-toggle">
                           <div className="flex justify-between h-6 w-11 cursor-pointer items-center rounded-full bg-dark dark:bg-white p-[3px]">
                             <div
-                              className={`${
-                                darkMode ? "toggle-circle" : ""
-                              } h-[18px] w-[18px] rounded-full bg-white dark:bg-dark transition duration-300 ease-in-out`}
+                              className={`${darkMode ? "toggle-circle" : ""
+                                } h-[18px] w-[18px] rounded-full bg-white dark:bg-dark transition duration-300 ease-in-out`}
                             ></div>
                             {darkMode ? (
                               <BsMoonStarsFill
-                                className={`text-moon transition duration-300 ease-in-out ${
-                                  darkMode ? "min-toggle-circle" : ""
-                                }`}
+                                className={`text-moon transition duration-300 ease-in-out ${darkMode ? "min-toggle-circle" : ""
+                                  }`}
                               />
                             ) : (
                               <BsBrightnessHighFill
-                                className={`text-brightness transition duration-300 ease-in-out ${
-                                  darkMode ? "min-toggle-circle" : ""
-                                }`}
+                                className={`text-brightness transition duration-300 ease-in-out ${darkMode ? "min-toggle-circle" : ""
+                                  }`}
                               />
                             )}
                           </div>
@@ -462,11 +455,11 @@ export default function Home() {
           <div className="container">
             <div className="text-center">
               <h1 className="text-3xl font-medium md:text-4xl lg:text-5xl text-primary">
-                Muhammad Naufal{" "}
+                Muhammad Naufal Saif Alfauzan{" "}
                 <div className="inline-block animate-fly">🚀</div>
               </h1>
               <h2 className="text-xl font-semibold md:text-2xl text-dark dark:text-white">
-                {i18n.t("pengembang-web")}
+                Full Stack Developer
               </h2>
             </div>
             <div className="mx-auto mt-6 overflow-hidden border-2 rounded-full w-60 h-60 md:w-72 md:h-72 lg:w-80 lg:h-80 bg-slate-700 dark:border-white">
@@ -474,11 +467,11 @@ export default function Home() {
             </div>
             <div className="mt-3 text-center">
               <a
-                aria-label={i18n.t("mempekerjakan-saya")}
+                aria-label={i18n.t("hubungi-saya")}
                 href="#kontak"
                 className="inline-block px-4 py-2 mt-4 text-base font-medium text-white rounded-lg shadow-sm shadow-slate-300 dark:shadow-slate-600 bg-primary lg:text-base hover:opacity-80"
               >
-                {i18n.t("mempekerjakan-saya")}
+                {i18n.t("hubungi-saya")}
               </a>
             </div>
           </div>
@@ -506,7 +499,8 @@ export default function Home() {
                 </p>
                 <a
                   aria-label={i18n.t("unduh-cv")}
-                  href="#"
+                  href="/mycv.pdf"
+                  download="CV_Muhammad-Naufal-Saif-Alfauzan.pdf"
                   className="inline-block px-4 py-2 mt-6 text-base font-medium text-white rounded-lg shadow-sm shadow-slate-300 dark:shadow-slate-600 bg-primary lg:text-base hover:opacity-80"
                 >
                   {i18n.t("unduh-cv")}{" "}
@@ -739,11 +733,10 @@ export default function Home() {
               <input
                 aria-labelledby="label-email"
                 type="email"
-                className={`absolute w-full h-full px-4 tracking-wide transition-all duration-200 ease-linear border border-solid rounded-lg outline-none peer focus:border-primary focus:ring-2 ${
-                  !styleEmail
+                className={`absolute w-full h-full px-4 tracking-wide transition-all duration-200 ease-linear border border-solid rounded-lg outline-none peer focus:border-primary focus:ring-2 ${!styleEmail
                     ? "border-light ring-0"
                     : "border-primary ring-2 dark:border-primary"
-                }  dark:text-white dark:bg-dark`}
+                  }  dark:text-white dark:bg-dark`}
                 required
                 name="email"
                 onChange={handleChangeEmail}
@@ -753,11 +746,10 @@ export default function Home() {
               <label
                 id="label-email"
                 className={`absolute text-base tracking-wide transition-all duration-200 ease-in-out -translate-y-1/2 lg:text-base text-light top-1/2 left-4 peer-focus:top-0 peer-focus:bg-white dark:peer-focus:bg-dark peer-focus:px-1 peer-focus:text-primary 
-                ${
-                  !styleEmail
+                ${!styleEmail
                     ? "text-light dark:text-white px-0"
                     : "top-[0px] bg-white dark:bg-dark px-1 text-primary dark:text-primary"
-                }`}
+                  }`}
               >
                 Email
               </label>
@@ -767,22 +759,20 @@ export default function Home() {
                 aria-labelledby="label-message"
                 id="pesan"
                 onChange={handleChangeMessage}
-                className={`absolute h-full w-full outline-none border border-solid rounded-lg transition-all duration-200 ease-linear px-4 peer focus:border-primary focus:ring-2 dark:text-white dark:bg-dark ${
-                  !styleMessage
+                className={`absolute h-full w-full outline-none border border-solid rounded-lg transition-all duration-200 ease-linear px-4 peer focus:border-primary focus:ring-2 dark:text-white dark:bg-dark ${!styleMessage
                     ? "border-light ring-0"
                     : "border-primary ring-2"
-                } tracking-wide py-3`}
+                  } tracking-wide py-3`}
                 required
                 name="message"
                 value={values.message}
               ></textarea>
               <label
                 id="label-message"
-                className={`absolute text-base lg:text-base -translate-y-1/2 transition-all duration-200 ease-in-out left-4 bg-white peer-focus:top-0  peer-focus:px-1 peer-focus:text-primary dark:peer-focus:bg-dark dark:bg-dark ${
-                  !styleMessage
+                className={`absolute text-base lg:text-base -translate-y-1/2 transition-all duration-200 ease-in-out left-4 bg-white peer-focus:top-0  peer-focus:px-1 peer-focus:text-primary dark:peer-focus:bg-dark dark:bg-dark ${!styleMessage
                     ? "text-light dark:text-white top-[15%] px-0 "
                     : "top-0  px-1 text-primary dark:bg-dark"
-                } tracking-wide`}
+                  } tracking-wide`}
               >
                 {i18n.t("pesan")}
               </label>
@@ -798,15 +788,14 @@ export default function Home() {
                 isLoading ||
                 validEmail
               }
-              className={`inline-block px-4 py-2 text-base font-medium text-white rounded-lg shadow-sm shadow-slate-300 dark:shadow-slate-600 bg-primary lg:text-base hover:opacity-80 ${
-                !values.name ||
-                !values.email ||
-                !values.message ||
-                isLoading ||
-                validEmail
+              className={`inline-block px-4 py-2 text-base font-medium text-white rounded-lg shadow-sm shadow-slate-300 dark:shadow-slate-600 bg-primary lg:text-base hover:opacity-80 ${!values.name ||
+                  !values.email ||
+                  !values.message ||
+                  isLoading ||
+                  validEmail
                   ? "cursor-not-allowed"
                   : ""
-              }`}
+                }`}
             >
               {!isLoading ? (
                 <>
@@ -845,9 +834,8 @@ export default function Home() {
         <a
           aria-label={i18n.t("aria-label-to-top")}
           href="#home"
-          className={`fixed bottom-4 right-4 lg:bottom-6 lg:right-6 z-[99] ${
-            !navBar ? "hidden" : ""
-          } w-12 h-12 md:h-13 md:w-13 lg:h-14 lg:w-14 rounded-full bg-primary p-4 hover:animate-pulse animate-bounce flex justify-center items-center text-white`}
+          className={`fixed bottom-4 right-4 lg:bottom-6 lg:right-6 z-[99] ${!navBar ? "hidden" : ""
+            } w-12 h-12 md:h-13 md:w-13 lg:h-14 lg:w-14 rounded-full bg-primary p-4 hover:animate-pulse animate-bounce flex justify-center items-center text-white`}
           id="to-top"
         >
           <div>
