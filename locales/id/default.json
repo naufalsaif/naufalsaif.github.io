@@ -26,8 +26,10 @@
   "aria-label-github": "Halaman Github",
   "aria-label-linkedin": "Halaman LinkedIn",
   "deskripsi-tentang-saya": "Halo! Saya Muhammad Naufal Saif Alfauzan, seorang Full Stack Developer dari Bogor dan lulusan Teknik Informatika Universitas Bina Insani. Saya senang merancang dan membangun aplikasi yang rapi, efisien, dan mudah digunakan. Dengan pengalaman menangani backend hingga frontend, saya terbiasa membuat sistem yang berjalan lancar dari awal hingga akhir. Bagi saya, teknologi adalah tentang memecahkan masalah nyata. Karena itu, saya selalu antusias untuk terus belajar, berkolaborasi dalam tim, dan menciptakan produk yang benar-benar bermanfaat.",
-  "judul-card-1": "Website Pengelolaan Keuangan Komplek",
-  "judul-card-2": "Website Pesan Rahasia",
+  "judul-card-1": "Aplikasi Pet Shop",
+  "judul-card-2": "Aplikasi Bank Sampah",
+  "judul-card-3": "Aplikasi Pesan Rahasia",
   "timeline-1": "Bersekolah di SMK ALBAHRI Kota Bekasi, mengambil jurusan Rekayasa Perangkat Lunak (RPL).",
-  "timeline-2": "Berkuliah di Universitas Bina Insani Kota Bekasi, mengambil jurusan Teknik Informatika."
+  "timeline-2": "Berkuliah di Universitas Bina Insani Kota Bekasi, mengambil jurusan Teknik Informatika.",
+  "selesai": "Selesai"
 }

@@ -26,8 +26,10 @@
   "aria-label-github": "Github page",
   "aria-label-linkedin": "LinkedIn page",
   "deskripsi-tentang-saya": "Hello! I’m Muhammad Naufal Saif Alfauzan, a full-stack developer from Bogor and a graduate of the Computer Science program at Bina Insani University. I enjoy designing and building clean, efficient, and user-friendly applications. With experience spanning both backend and frontend development, I’m accustomed to creating systems that run smoothly from start to finish. For me, technology is about solving real-world problems. That’s why I’m always eager to keep learning, collaborate with teams, and create products that are truly useful.",
-  "judul-card-1": "Housing Finance Management Website",
-  "judul-card-2": "Secret Message Website",
-  "timeline-1": "Attended SMK ALBAHRI Bekasi City, majoring in Software Engineering.",
-  "timeline-2": "Studying at Bina Insani University Bekasi City, majoring in Informatics Engineering."
+  "judul-card-1": "Pet Shop App",
+  "judul-card-2": "Waste Bank App",
+  "judul-card-3": "Secret Message App",
+  "timeline-1": "Attended SMK ALBAHRI in Bekasi, majoring in Software Engineering.",
+  "timeline-2": "I am studying Computer Science at Bina Insani University in Bekasi.",
+  "selesai": "Completed"
 }

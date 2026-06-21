@@ -14,6 +14,8 @@ import logo9 from "../public/nextjs.webp";
 import logo10 from "../public/express.webp";
 import logo11 from "../public/mysql.webp";
 import logo12 from "../public/mongodb.webp";
+import logo13 from "../public/postgresql.webp";
+import logo14 from "../public/golang.webp";
 import flagid from "../public/id.svg";
 import flagen from "../public/gb.svg";
 import Image from "next/image";
@@ -22,7 +24,6 @@ import {
   BsMoonStarsFill,
   BsBrightnessHighFill,
   BsFileEarmarkText,
-  BsHourglass,
 } from "react-icons/bs";
 import { FaLaravel, FaRegPaperPlane } from "react-icons/fa";
 import Slider from "react-slick";
@@ -33,10 +34,12 @@ import {
   AiOutlineLinkedin,
 } from "react-icons/ai";
 import { FaCss3Alt } from "react-icons/fa";
-import { RiArrowUpSLine } from "react-icons/ri";
+import { RiArrowUpSLine, RiFlutterFill } from "react-icons/ri";
 import { BiCopyright } from "react-icons/bi";
 import { IoLogoJavascript } from "react-icons/io";
 import { DiCodeigniter } from "react-icons/di";
+import { SiMysql } from "react-icons/si";
+
 import { useRouter } from "next/router";
 import Script from "next/script";
 import { sendContactForm } from "@/lib/api";
@@ -313,11 +316,13 @@ export default function Home() {
       <div className="bg-white text-slate-500 dark:bg-dark dark:text-light">
         <header
           ref={menuRef}
-          className={`absolute top-0 left-0 z-10 flex w-full items-center bg-transparent lg:px-40 ${navBar
-              ? `${darkMode ? "navbar-fixed-dark" : "navbar-fixed"
-              } bg-white bg-opacity-70 backdrop-blur-sm dark:bg-dark dark:bg-opacity-50`
+          className={`absolute top-0 left-0 z-10 flex w-full items-center bg-transparent lg:px-40 ${
+            navBar
+              ? `${
+                  darkMode ? "navbar-fixed-dark" : "navbar-fixed"
+                } bg-white bg-opacity-70 backdrop-blur-sm dark:bg-dark dark:bg-opacity-50`
               : ""
-            } `}
+          } `}
         >
           <div className="container">
             <div className="relative flex items-center justify-between">
@@ -336,8 +341,9 @@ export default function Home() {
                   id="hamburger"
                   name="hamburger"
                   type="button"
-                  className={`absolute right-4 block lg:hidden ${hamburgerActive ? "hamburger-active" : ""
-                    }`}
+                  className={`absolute right-4 block lg:hidden ${
+                    hamburgerActive ? "hamburger-active" : ""
+                  }`}
                   onClick={() => setHamburgerActive(!hamburgerActive)}
                 >
                   <span
@@ -353,8 +359,9 @@ export default function Home() {
 
                 <nav
                   id="nav-menu"
-                  className={`absolute right-4 top-full w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg dark:bg-dark dark:shadow-slate-500 lg:static lg:block lg:max-w-full lg:rounded-none lg:bg-transparent lg:shadow-none lg:dark:bg-transparent ${!hamburgerActive ? "hidden" : ""
-                    }`}
+                  className={`absolute right-4 top-full w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg dark:bg-dark dark:shadow-slate-500 lg:static lg:block lg:max-w-full lg:rounded-none lg:bg-transparent lg:shadow-none lg:dark:bg-transparent ${
+                    !hamburgerActive ? "hidden" : ""
+                  }`}
                 >
                   <ul className="block lg:flex">
                     <li className="group">
@@ -414,18 +421,21 @@ export default function Home() {
                         <label htmlFor="dark-toggle">
                           <div className="flex justify-between h-6 w-11 cursor-pointer items-center rounded-full bg-dark dark:bg-white p-[3px]">
                             <div
-                              className={`${darkMode ? "toggle-circle" : ""
-                                } h-[18px] w-[18px] rounded-full bg-white dark:bg-dark transition duration-300 ease-in-out`}
+                              className={`${
+                                darkMode ? "toggle-circle" : ""
+                              } h-[18px] w-[18px] rounded-full bg-white dark:bg-dark transition duration-300 ease-in-out`}
                             ></div>
                             {darkMode ? (
                               <BsMoonStarsFill
-                                className={`text-moon transition duration-300 ease-in-out ${darkMode ? "min-toggle-circle" : ""
-                                  }`}
+                                className={`text-moon transition duration-300 ease-in-out ${
+                                  darkMode ? "min-toggle-circle" : ""
+                                }`}
                               />
                             ) : (
                               <BsBrightnessHighFill
-                                className={`text-brightness transition duration-300 ease-in-out ${darkMode ? "min-toggle-circle" : ""
-                                  }`}
+                                className={`text-brightness transition duration-300 ease-in-out ${
+                                  darkMode ? "min-toggle-circle" : ""
+                                }`}
                               />
                             )}
                           </div>
@@ -550,6 +560,12 @@ export default function Home() {
               <div className="px-4 slide">
                 <Image src={logo12} alt="logos" className="mx-auto" />
               </div>
+              <div className="px-4 slide">
+                <Image src={logo13} alt="logos" className="mx-auto" />
+              </div>
+              <div className="px-4 slide">
+                <Image src={logo14} alt="logos" className="mx-auto" />
+              </div>
             </Slider>
           </div>
         </section>
@@ -564,17 +580,42 @@ export default function Home() {
                 {i18n.t("proyek-saya")}
               </h1>
             </div>
+
             <div className="flex flex-wrap justify-center w-full gap-10">
               <div className="shadow-lg dark:shadow-md rounded overflow-hidden w-full md:w-[340px] lg:w-[350px] dark:shadow-white">
                 <div className="w-full h-[250px] sm:h-[350px] image-card1"></div>
                 <div className="px-4 pt-2 pb-6">
                   <h1 className="mb-3 text-lg font-semibold lg:text-xl text-dark dark:text-white">
-                    <a
-                      href="https://groupvista.000webhostapp.com/"
-                      target="_blank"
-                    >
-                      {i18n.t("judul-card-1")}
-                    </a>
+                    <a href="#">{i18n.t("judul-card-1")}</a>
+                  </h1>
+                  <div className="flex flex-wrap gap-1">
+                    <div className="bg-[#54C5F8] px-3 py-1 text-base lg:text-base text-white rounded-lg uppercase font-medium">
+                      <span className="flex items-center h-full gap-1">
+                        <RiFlutterFill />
+                        flutter
+                      </span>
+                    </div>
+                    <div className="bg-[#EF4223] px-3 py-1 text-base lg:text-base text-white rounded-lg uppercase font-medium">
+                      <span className="flex items-center h-full gap-1">
+                        <DiCodeigniter />
+                        codeigniter
+                      </span>
+                    </div>
+                    <div className="bg-[#00758F] px-3 py-1 text-base lg:text-base text-white rounded-lg uppercase font-medium">
+                      <span className="flex items-center h-full gap-1">
+                        <SiMysql />
+                        mysql
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="shadow-lg dark:shadow-md rounded overflow-hidden w-full md:w-[340px] lg:w-[350px] dark:shadow-white">
+                <div className="w-full h-[250px] sm:h-[350px] image-card2"></div>
+                <div className="px-4 pt-2 pb-6">
+                  <h1 className="mb-3 text-lg font-semibold lg:text-xl text-dark dark:text-white">
+                    <a href="#">{i18n.t("judul-card-2")}</a>
                   </h1>
                   <div className="flex flex-wrap gap-1">
                     <div className="bg-[#E34F26] text-base lg:text-base px-3 py-1 text-white rounded-lg uppercase font-medium">
@@ -601,20 +642,21 @@ export default function Home() {
                         codeigniter
                       </span>
                     </div>
+                    <div className="bg-[#00758F] px-3 py-1 text-base lg:text-base text-white rounded-lg uppercase font-medium">
+                      <span className="flex items-center h-full gap-1">
+                        <SiMysql />
+                        mysql
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
 
               <div className="shadow-lg dark:shadow-md rounded overflow-hidden w-full md:w-[340px] lg:w-[350px] dark:shadow-white">
-                <div className="w-full h-[250px] sm:h-[350px] image-card2"></div>
+                <div className="w-full h-[250px] sm:h-[350px] image-card3"></div>
                 <div className="px-4 pt-2 pb-6">
                   <h1 className="mb-3 text-lg font-semibold lg:text-xl text-dark dark:text-white">
-                    <a
-                      href="https://bisikin7.000webhostapp.com/"
-                      target="_blank"
-                    >
-                      {i18n.t("judul-card-2")}
-                    </a>
+                    <a href="#">{i18n.t("judul-card-3")}</a>
                   </h1>
                   <div className="flex flex-wrap gap-1">
                     <div className="bg-[#E34F26] text-base lg:text-base px-3 py-1 text-white rounded-lg uppercase font-medium">
@@ -639,6 +681,12 @@ export default function Home() {
                       <span className="flex items-center h-full gap-1">
                         <FaLaravel />
                         laravel
+                      </span>
+                    </div>
+                    <div className="bg-[#00758F] px-3 py-1 text-base lg:text-base text-white rounded-lg uppercase font-medium">
+                      <span className="flex items-center h-full gap-1">
+                        <SiMysql />
+                        mysql
                       </span>
                     </div>
                   </div>
@@ -673,7 +721,7 @@ export default function Home() {
                 </div>
                 <div>
                   <p className="text-base font-medium lg:text-base text-primary">
-                    2021 - Sekarang
+                    2021 - 2025 ({i18n.t("selesai")})
                   </p>
                   <p className="mt-1 text-base text-slate-700 dark:text-light lg:text-lg">
                     {i18n.t("timeline-2")}
@@ -694,7 +742,7 @@ export default function Home() {
                 </div>
                 <div>
                   <p className="text-base font-medium lg:text-base text-primary">
-                    2017 - 2020
+                    2017 - 2020 ({i18n.t("selesai")})
                   </p>
                   <p className="mt-1 text-base text-slate-700 dark:text-light lg:text-lg">
                     {i18n.t("timeline-1")}
@@ -733,10 +781,11 @@ export default function Home() {
               <input
                 aria-labelledby="label-email"
                 type="email"
-                className={`absolute w-full h-full px-4 tracking-wide transition-all duration-200 ease-linear border border-solid rounded-lg outline-none peer focus:border-primary focus:ring-2 ${!styleEmail
+                className={`absolute w-full h-full px-4 tracking-wide transition-all duration-200 ease-linear border border-solid rounded-lg outline-none peer focus:border-primary focus:ring-2 ${
+                  !styleEmail
                     ? "border-light ring-0"
                     : "border-primary ring-2 dark:border-primary"
-                  }  dark:text-white dark:bg-dark`}
+                }  dark:text-white dark:bg-dark`}
                 required
                 name="email"
                 onChange={handleChangeEmail}
@@ -746,10 +795,11 @@ export default function Home() {
               <label
                 id="label-email"
                 className={`absolute text-base tracking-wide transition-all duration-200 ease-in-out -translate-y-1/2 lg:text-base text-light top-1/2 left-4 peer-focus:top-0 peer-focus:bg-white dark:peer-focus:bg-dark peer-focus:px-1 peer-focus:text-primary 
-                ${!styleEmail
+                ${
+                  !styleEmail
                     ? "text-light dark:text-white px-0"
                     : "top-[0px] bg-white dark:bg-dark px-1 text-primary dark:text-primary"
-                  }`}
+                }`}
               >
                 Email
               </label>
@@ -759,20 +809,22 @@ export default function Home() {
                 aria-labelledby="label-message"
                 id="pesan"
                 onChange={handleChangeMessage}
-                className={`absolute h-full w-full outline-none border border-solid rounded-lg transition-all duration-200 ease-linear px-4 peer focus:border-primary focus:ring-2 dark:text-white dark:bg-dark ${!styleMessage
+                className={`absolute h-full w-full outline-none border border-solid rounded-lg transition-all duration-200 ease-linear px-4 peer focus:border-primary focus:ring-2 dark:text-white dark:bg-dark ${
+                  !styleMessage
                     ? "border-light ring-0"
                     : "border-primary ring-2"
-                  } tracking-wide py-3`}
+                } tracking-wide py-3`}
                 required
                 name="message"
                 value={values.message}
               ></textarea>
               <label
                 id="label-message"
-                className={`absolute text-base lg:text-base -translate-y-1/2 transition-all duration-200 ease-in-out left-4 bg-white peer-focus:top-0  peer-focus:px-1 peer-focus:text-primary dark:peer-focus:bg-dark dark:bg-dark ${!styleMessage
+                className={`absolute text-base lg:text-base -translate-y-1/2 transition-all duration-200 ease-in-out left-4 bg-white peer-focus:top-0  peer-focus:px-1 peer-focus:text-primary dark:peer-focus:bg-dark dark:bg-dark ${
+                  !styleMessage
                     ? "text-light dark:text-white top-[15%] px-0 "
                     : "top-0  px-1 text-primary dark:bg-dark"
-                  } tracking-wide`}
+                } tracking-wide`}
               >
                 {i18n.t("pesan")}
               </label>
@@ -788,14 +840,15 @@ export default function Home() {
                 isLoading ||
                 validEmail
               }
-              className={`inline-block px-4 py-2 text-base font-medium text-white rounded-lg shadow-sm shadow-slate-300 dark:shadow-slate-600 bg-primary lg:text-base hover:opacity-80 ${!values.name ||
-                  !values.email ||
-                  !values.message ||
-                  isLoading ||
-                  validEmail
+              className={`inline-block px-4 py-2 text-base font-medium text-white rounded-lg shadow-sm shadow-slate-300 dark:shadow-slate-600 bg-primary lg:text-base hover:opacity-80 ${
+                !values.name ||
+                !values.email ||
+                !values.message ||
+                isLoading ||
+                validEmail
                   ? "cursor-not-allowed"
                   : ""
-                }`}
+              }`}
             >
               {!isLoading ? (
                 <>
@@ -834,8 +887,9 @@ export default function Home() {
         <a
           aria-label={i18n.t("aria-label-to-top")}
           href="#home"
-          className={`fixed bottom-4 right-4 lg:bottom-6 lg:right-6 z-[99] ${!navBar ? "hidden" : ""
-            } w-12 h-12 md:h-13 md:w-13 lg:h-14 lg:w-14 rounded-full bg-primary p-4 hover:animate-pulse animate-bounce flex justify-center items-center text-white`}
+          className={`fixed bottom-4 right-4 lg:bottom-6 lg:right-6 z-[99] ${
+            !navBar ? "hidden" : ""
+          } w-12 h-12 md:h-13 md:w-13 lg:h-14 lg:w-14 rounded-full bg-primary p-4 hover:animate-pulse animate-bounce flex justify-center items-center text-white`}
           id="to-top"
         >
           <div>
@@ -869,7 +923,7 @@ export default function Home() {
                 <a
                   aria-label={i18n.t("aria-label-linkedin")}
                   target="_blank"
-                  href="https://www.linkedin.com/in/m-naufal-saif-alfauzan-2373b3260"
+                  href="https://www.linkedin.com/in/mnaufalsaif/"
                   className="bg-[#0A66C2] w-8 h-8 lg:w-10 lg:h-10 rounded-full flex justify-center items-center hover:cursor-pointer shadow hover:scale-110 transition duration-200 ease-linear"
                 >
                   <AiOutlineLinkedin className="text-xl text-white lg:text-2xl dark:text-slate-100" />
